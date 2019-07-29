@@ -1,8 +1,9 @@
 package selab.mvc.models.entities;
 
+import selab.mvc.models.DataSet;
 import selab.mvc.models.Model;
-import sun.misc.Regexp;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Course implements Model {
@@ -11,7 +12,7 @@ public class Course implements Model {
     private String startTime = null;
     private String endTime = null;
     private Weekday weekday;
-
+    private DataSet<Registration> registrations;
 
     @Override
     public String getPrimaryKey() {
@@ -20,6 +21,9 @@ public class Course implements Model {
 
     public void setTitle(String value) { this.title = value; }
     public String getTitle() { return this.title; }
+
+    public void setRegistrations(DataSet<Registration> regs) { registrations = regs;}
+
 
     public void setCourseNo(String value) {
         if (!validateCourseNo(value))
@@ -61,13 +65,26 @@ public class Course implements Model {
     }
 
     public float getAverage() {
-        // TODO: Calculate and return the average of the points
-        return 0;
+        ArrayList<Registration> allRegs = registrations.getAll();
+        int avg = 0;
+        for(int i = 0;i<allRegs.size();i++){
+            avg += allRegs.get(i).getPoints();
+        }
+
+        return avg/allRegs.size();
     }
 
     public String getStudents() {
-        // TODO: Return a comma separated list of student names
-        return "-";
+
+        ArrayList<Registration> allRegs = registrations.getAll();
+        String str = "" + allRegs.size();
+        for(int i = 0;i<allRegs.size();i++) {
+            str += allRegs.get(i).getStudentNo();
+            if(i!=allRegs.size()-1)
+                str+=" - ";
+        }
+
+        return str;
     }
 
     /**

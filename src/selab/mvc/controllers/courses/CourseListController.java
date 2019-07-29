@@ -6,6 +6,7 @@ import selab.mvc.controllers.Controller;
 import selab.mvc.models.DataContext;
 import selab.mvc.models.DataSet;
 import selab.mvc.models.entities.Course;
+import selab.mvc.models.entities.Registration;
 import selab.mvc.views.JsonView;
 import selab.mvc.views.View;
 
@@ -15,6 +16,7 @@ import java.io.InputStream;
 public class CourseListController extends Controller {
 
     private DataSet<Course> courses;
+
     public CourseListController(DataContext dataContext) {
         super(dataContext);
         courses = dataContext.getCourses();

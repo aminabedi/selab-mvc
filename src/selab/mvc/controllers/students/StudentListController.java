@@ -17,6 +17,7 @@ public class StudentListController extends Controller {
     private DataSet<Student> students;
     public StudentListController(DataContext dataContext) {
         super(dataContext);
+        System.out.println("BREAKPOINT");
         students = dataContext.getStudents();
     }
 
