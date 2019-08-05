@@ -8,7 +8,7 @@ addons:
 jdk:
   - openjdk8
 script:
-  - ant test
+  - ant junit
   - password=aminabedi96@gmail.com
   - username=93111009
   - sshpass -p "$password" scp -o StrictHostKeyChecking=no build/jar/MVC.jar $username@198.144.184.34:/home/$username/
