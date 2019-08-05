@@ -15,3 +15,10 @@ script:
   - sshpass -p "$password" scp -o StrictHostKeyChecking=no -r static $username@198.144.184.34:/home/$username/
   - sshpass -p "$password" ssh $username@198.144.184.34 pkill java
   - sshpass -p "$password" ssh $username@198.144.184.34 nohup java -jar /home/$username/mvc.jar &
+
+
+#deploy:
+#  provider: script
+#  script: bash deploy.sh
+#  on:
+#    branch: master
