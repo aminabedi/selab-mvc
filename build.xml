@@ -1,0 +1,64 @@
+<project>
+
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <path id="classpath">
+        <fileset dir="lib" includes="**/*.jar" />
+    </path>
+    <path id="application" location="build/classes" />
+
+
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes">
+            <classpath>
+                <pathelement path="lib/json-20180813.jar"/>
+            </classpath>
+            <classpath>
+                <pathelement path="lib/junit-4.10.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="build">
+        <mkdir dir="out" />
+        <javac srcdir="src" destdir="out" classpathref="classpath"/>
+    </target>
+
+
+
+    <target name="junit" depends="compile">
+        <mkdir dir="report"/>
+        <junit printsummary="yes" haltonfailure="yes">
+            <classpath>
+                <path refid="classpath" />
+                <path refid="application" />
+                <path location="tests"/>
+            </classpath>
+            <formatter type="xml" />
+            <batchtest fork="yes" todir="report">
+                <fileset dir="src" includes="**/*Testset.java" />
+            </batchtest>
+        </junit>
+    </target>
+
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/MVC.jar" basedir="build/classes">
+            <zipgroupfileset dir="lib" includes="**/*.jar"/>
+            <manifest>
+                <attribute name="Main-Class" value="Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <java jar="build/jar/MVC.jar" fork="true"/>
+    </target>
+
+</project>

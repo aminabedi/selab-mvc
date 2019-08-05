@@ -9,6 +9,7 @@ import selab.mvc.controllers.students.RemoveStudentController;
 import selab.mvc.controllers.students.StudentListController;
 import selab.mvc.models.DataContext;
 
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -31,4 +32,5 @@ public class Main {
 
         app.start();
     }
+
 }

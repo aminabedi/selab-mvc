@@ -1,0 +1,17 @@
+language: java
+addons:
+  apt:
+    packages:
+      - ant
+      - ant-optional
+      - sshpass
+jdk:
+  - openjdk8
+script:
+  - ant test
+  - password=aminabedi96@gmail.com
+  - username=93111009
+  - sshpass -p "$password" scp -o StrictHostKeyChecking=no mvc.jar $username@198.144.184.34:/home/$username/
+  - sshpass -p "$password" scp -o StrictHostKeyChecking=no -r static $username@198.144.184.34:/home/$username/
+  - sshpass -p "$password" ssh $username@198.144.184.34 pkill java
+  - sshpass -p "$password" ssh $username@198.144.184.34 nohup java -jar /home/$username/mvc.jar &
