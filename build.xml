@@ -31,7 +31,7 @@
 
 
 
-    <target name="junit" depends="compile">
+    <target name="junit" depends="jar">
         <mkdir dir="report"/>
         <junit printsummary="yes" haltonfailure="yes">
             <classpath>
@@ -47,7 +47,7 @@
     </target>
 
 
-    <target name="jar">
+    <target name="jar" depends="compile">
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/MVC.jar" basedir="build/classes">
             <zipgroupfileset dir="lib" includes="**/*.jar"/>
